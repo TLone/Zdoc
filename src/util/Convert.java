@@ -25,7 +25,7 @@ public class Convert {
 	private String pdfFile;
 	private String swfFile;
 	Convert(){}
-	Convert(String of,String pf,String sf)
+	public Convert(String of,String pf,String sf)
 	{
 		officeFile=of;
 		pdfFile=pf;

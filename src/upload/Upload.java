@@ -88,12 +88,18 @@ public class Upload extends ActionSupport{
 			
 		}
 		//文件转换测试
-//		Convert c=new Convert();
-//		String souFile=ServletActionContext.getServletContext()
-//				.getRealPath("files")+"/word.doc";
-//		String desFile=ServletActionContext.getServletContext()
-//		.getRealPath("pdfs")+"/testpdf.pdf";
-//		c.office2PDF(souFile, desFile);
+		String officeFile=ServletActionContext.getServletContext()
+		.getRealPath("files")+"/word.doc";
+		String pdfFile=ServletActionContext.getServletContext()
+		.getRealPath("pdfs")+"/testpdf.pdf";
+		String swfFile=ServletActionContext.getServletContext()
+		.getRealPath("swfs")+"/testswf.swf";
+		
+		Convert c=new Convert(officeFile,pdfFile,swfFile);
+		c.office2PDF();
+		c.pdf2swf();
+		
+
 		
 		return "success";
 	}
