@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
 
 import util.Convert;
@@ -115,14 +118,14 @@ public class Upload extends ActionSupport {
 		// 文件信息保存到数据库officepath pdfpath swfpath originnaltype contributer size
 		// description
 		Dao d = new Dao();
-		// public void insertFile(String officepath,String pdfpath,String
-		// swfpath,String originnaltype,String contributer,long size,String
-		// description)
 		d.insertFile(officePath, pdfPath, swfPath, originnaltype, contributer,
 				size, description);
-		// System.out.println(officePath);
-		// System.out.println(pdfPath);
-		// System.out.println(swfPath);
+		
+		//session设置swf文件到路径 让show.jsp页面展示
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		session.setAttribute("swfPath", "./swfs/"+trueFileName+".swf");
+
 
 		return "success";
 	}

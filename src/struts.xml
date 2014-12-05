@@ -15,7 +15,7 @@
 				<param name="allowedTypes">application/vnd.ms-works,application/vnd.ms-powerpoint,application/msword,application/pdf</param>
 			</interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="success">/show.jsp</result>
+			<result name="success" type="redirect">/show.jsp</result>
 			<result name="input">/index.jsp</result>
 		</action>
 

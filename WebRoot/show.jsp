@@ -15,7 +15,9 @@
                 body { margin:0; padding:0; overflow:auto; }     
                 #flashContent { display:none; }  
             </style>   
-      
+      <%
+      	String path=session.getAttribute("swfPath").toString();
+       %>
     <title>文档在线预览系统</title>  
     </head>  
     <body>   
@@ -29,7 +31,7 @@
                 $('#documentViewer').FlexPaperViewer(  
                         { config : {  
       //在这里设置路径，显示
-                            SWFFile : './swfs/testswf.swf',  
+                            SWFFile : '<%=path%>',  
       
                             Scale : 0.6,  
                             ZoomTransition : 'easeOut',  
