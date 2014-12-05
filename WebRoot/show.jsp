@@ -29,7 +29,7 @@
                 $('#documentViewer').FlexPaperViewer(  
                         { config : {  
       //在这里设置路径，显示
-                            SWFFile : 'swfs/testswf.swf',  
+                            SWFFile : './swfs/testswf.swf',  
       
                             Scale : 0.6,  
                             ZoomTransition : 'easeOut',  

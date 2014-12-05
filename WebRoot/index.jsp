@@ -44,8 +44,8 @@ body {
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#"> <img alt="Brand"
-						src="./pic/lolo.png" width="20px" height="20px"> </a>
+					<a class="navbar-brand" href=""> <img alt="Brand"
+						src="./pic/lolo.png" width="20px" height="20px" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"> </a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
