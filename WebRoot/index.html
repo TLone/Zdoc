@@ -90,78 +90,81 @@ body {
 				</div>
 			</div>
 			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Hot Docs
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Hot Docs
+							</div>
+							<div class="panel-body">
+								<ul class="list-group">
+									<li class="list-group-item">
+										<span class="badge">4</span> Cras justoasdfa odio
+									</li>
+									<li class="list-group-item">
+										<span class="badge">14</span> Cras justo odio
+									</li>
+									<li class="list-group-item">
+										<span class="badge">14</span> Cras justo odio
+									</li>
+									<li class="list-group-item">
+										<span class="badge">14</span> Cras justo odio
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
-					<div class="panel-body">
-						<ul class="list-group">
-							<li class="list-group-item">
-								<span class="badge">4</span> Cras justoasdfa odio
-							</li>
-							<li class="list-group-item">
-								<span class="badge">14</span> Cras justo odio
-							</li>
-							<li class="list-group-item">
-								<span class="badge">14</span> Cras justo odio
-							</li>
-							<li class="list-group-item">
-								<span class="badge">14</span> Cras justo odio
-							</li>
-						</ul>
+
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Upload Doc
+							</div>
+							<div class="panel-body">
+								<form role="form" action="UploadAction"
+									enctype="multipart/form-data" method="post">
+									<div class="form-group">
+										<label>
+											文件描述
+										</label>
+										<input type="text" class="form-control" id="description"
+											placeholder="description" name="description">
+									</div>
+									<div class="form-group">
+										<label>
+											文件分类
+										</label>
+										<select class="form-control" name="type">
+											<option value="1">
+												1
+											</option>
+											<option value="2">
+												2
+											</option>
+											<option value="3">
+												3
+											</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label>
+											File input
+										</label>
+										<input type="file" id="file" name="file">
+									</div>
+									<button type="submit" class="btn btn-default">
+										Submit
+									</button>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-5"></div>
-			<div class="col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Upload Doc
-					</div>
-					<div class="panel-body">
-						<form role="form" action="UploadAction"
-							enctype="multipart/form-data" method="post">
-							<div class="form-group">
-								<label>
-									文件描述
-								</label>
-								<input type="text" class="form-control" id="description"
-									placeholder="description" name="description">
-							</div>
-							<div class="form-group">
-								<label>
-									文件分类
-								</label>
-								<select class="form-control" name="type">
-									<option value="1">
-										1
-									</option>
-									<option value="2">
-										2
-									</option>
-									<option value="3">
-										3
-									</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>
-									File input
-								</label>
-								<input type="file" id="file" name="file">
-							</div>
-							<button type="submit" class="btn btn-default">
-								Submit
-							</button>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
+
 	</body>
 </html>
