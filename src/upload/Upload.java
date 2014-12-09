@@ -24,6 +24,23 @@ public class Upload extends ActionSupport {
 	private String fileContentType; // xxxContentType
 	private String fileFileName;// xxxFileName
 	private String description;
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public long getSize() {
+		return size;
+	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
 
 	private final String officesDir = "/offices/";
 	private final String pdfsDir = "/pdfs/";
@@ -73,61 +90,68 @@ public class Upload extends ActionSupport {
 	public String upload() throws Exception {
 		// File saved = new File(ServletActionContext.getServletContext()
 		// .getRealPath("files"), fileFileName);
-		File saved = new File(officesDir, getFileFileName());
-		InputStream ins = null;
-		OutputStream ous = null;
-		size = saved.length() / 1024;
-		try {
-			saved.getParentFile().mkdirs();// 确保目的路径存在
+		if (getDescription() != null && getFileFileName() != null) {
+			File saved = new File(officesDir, getFileFileName());
+			InputStream ins = null;
+			OutputStream ous = null;
+			size = saved.length() / 1024;
+			try {
+				saved.getParentFile().mkdirs();// 确保目的路径存在
 
-			ins = new FileInputStream(file);
-			ous = new FileOutputStream(saved);
+				ins = new FileInputStream(file);
+				ous = new FileOutputStream(saved);
 
-			byte[] buffer = new byte[1024];
-			int len = 0;
-			while ((len = ins.read(buffer)) != -1) {
-				ous.write(buffer, 0, len);
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				while ((len = ins.read(buffer)) != -1) {
+					ous.write(buffer, 0, len);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			} finally {
+				if (ous != null)
+					ous.close();
+				if (ins != null)
+					ins.close();
+
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 
-		} finally {
-			if (ous != null)
-				ous.close();
-			if (ins != null)
-				ins.close();
+			int fileIndex = fileFileName.indexOf(".");
+			String trueFileName = fileFileName.substring(0, fileIndex);// 获得文件名，去除后缀
 
+			String officePath = officesDir + fileFileName;
+			String pdfPath = pdfsDir + trueFileName + ".pdf";
+			String swfPath = swfsDir + trueFileName + ".swf";
+
+			// fileContentType
+			contributer = "游客";
+			// size;
+			// description
+
+			// 文件转换测试
+			Convert c = new Convert(officePath, pdfPath, swfPath);
+			c.office2PDF();
+			c.pdf2swf();
+
+			// 文件信息保存到数据库officepath pdfpath swfpath originnaltype contributer
+			// size
+			// description
+			Dao d = new Dao();
+			d.insertFile(officePath, pdfPath, swfPath, originnaltype,
+					contributer, size, description);
+
+			// session设置swf文件到路径 让show.jsp页面展示
+			HttpServletRequest request = ServletActionContext.getRequest();
+			HttpSession session = request.getSession();
+			session.setAttribute("swfPath", "./swfs/" + trueFileName + ".swf");
+			System.out.println(type);
+			return "success";
 		}
-
-		int fileIndex = fileFileName.indexOf(".");
-		String trueFileName = fileFileName.substring(0, fileIndex);// 获得文件名，去除后缀
-
-		String officePath = officesDir + fileFileName;
-		String pdfPath = pdfsDir + trueFileName + ".pdf";
-		String swfPath = swfsDir + trueFileName + ".swf";
-		// fileContentType
-		contributer = "游客";
-		// size;
-		// description
-
-		// 文件转换测试
-		Convert c = new Convert(officePath, pdfPath, swfPath);
-		c.office2PDF();
-		c.pdf2swf();
-
-		// 文件信息保存到数据库officepath pdfpath swfpath originnaltype contributer size
-		// description
-		Dao d = new Dao();
-		d.insertFile(officePath, pdfPath, swfPath, originnaltype, contributer,
-				size, description);
-		
-		//session设置swf文件到路径 让show.jsp页面展示
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		session.setAttribute("swfPath", "./swfs/"+trueFileName+".swf");
-
-
-		return "success";
+		else
+		{
+			return "error";
+		}
 	}
 
 }
