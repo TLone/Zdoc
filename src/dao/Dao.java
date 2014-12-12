@@ -27,10 +27,10 @@ public class Dao {
 	}
 
 	
-	public void insertFile(String officepath,String pdfpath,String swfpath,String originnaltype,String contributer,long size,String description)
+	public void insertFile(String officepath,String pdfpath,String swfpath,String originnaltype,String contributer,long size,String description,int hit,String type,int good)
 	{
 		Connection conn = getConn();
-		String sql="insert into file (officepath,pdfpath,swfpath,originnaltype,contributer,size,description) values(?,?,?,?,?,?,?)";
+		String sql="insert into file (officepath,pdfpath,swfpath,originnaltype,contributer,size,description,hit,type,good) values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, officepath);
@@ -40,6 +40,9 @@ public class Dao {
 			pstmt.setString(5, contributer);
 			pstmt.setLong(6, size);
 			pstmt.setString(7, description);
+			pstmt.setInt(8, hit);
+			pstmt.setString(9, type);
+			pstmt.setInt(10, good);
 			
 			pstmt.execute();
 			conn.close();

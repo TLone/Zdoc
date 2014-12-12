@@ -138,8 +138,11 @@ public class Upload extends ActionSupport {
 			// size
 			// description
 			Dao d = new Dao();
+			
+			int hit=1;
+			int good=0;
 			d.insertFile(officePath, pdfPath, swfPath, originnaltype,
-					contributer, size, description);
+					contributer, size, description,hit,type,good);
 
 			// session设置swf文件到路径 让show.jsp页面展示
 			HttpServletRequest request = ServletActionContext.getRequest();
