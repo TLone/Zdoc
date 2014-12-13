@@ -8,18 +8,18 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
 		<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-		<link href="css/bootstrapCyborg.min.css" rel="stylesheet">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
 
 		<script src="js/jquery.min.js"></script>
 		<script src="js/handlebars-v2.0.0.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<style>
 body {
-	padding-top: 80px
+	padding-top: 50px
 }
 
 *{
-font-family: 微软雅黑;
+font-family:;
 font-weight:bold;
 }
 </style>
@@ -27,7 +27,7 @@ font-weight:bold;
 
 	<body>
 
-		<!-- ---------------------------------------------------------- -->
+		<!-- ----------Navbar------------------------------------------------ -->
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -36,8 +36,8 @@ font-weight:bold;
 				<div class="col-md-8">
 					<div class="navbar-header">
 						<a class="navbar-brand" href=""> <img alt="Brand"
-								src="./pic/lolo.png" width="20px" height="20px"
-								data-toggle="tooltip" data-placement="bottom"
+								src="./pic/logo.png" width="25px" height="25px"
+								 data-placement="bottom"
 								title="Tooltip on bottom"> </a>
 					</div>
 
@@ -67,109 +67,174 @@ font-weight:bold;
 						</ul>
 					</div>
 				</div>
+				<div class="col-md-2"></div>
 			</div>
 
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
 		</nav>
-		<!--
-	<struts:actionerror />
-	<struts:form action="UploadAction" enctype="multipart/form-data"
-		method="post" validate="true">
-		<struts:label value="upload file" class="form-control"></struts:label>
-		<struts:textfield name="username"></struts:textfield>
-		<struts:file name="file" label="file1"></struts:file>
-		<struts:submit value="上传" method="upload"></struts:submit>
-	</struts:form>
-	- -->
+<!-- -----------End nav bar---------------------------------------------------------------- -->
 
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-5">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h6><strong>文档列表</strong></h6>
-					</div>
-					<div class="panel-body"></div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Hot Docs
-							</div>
-							<div class="panel-body">
-								<ul class="list-group">
-									<li class="list-group-item">
-										<span class="badge">4</span> Cras justoasdfa odio
-									</li>
-									<li class="list-group-item">
-										<span class="badge">14</span> Cras justo odio
-									</li>
-									<li class="list-group-item">
-										<span class="badge">14</span> Cras justo odio
-									</li>
-									<li class="list-group-item">
-										<span class="badge">14</span> Cras justo odio
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+<!-- -----------Jumbo--------------------------------------------------------------------------- -->		
+<div class="jumbotron" style="width:100%;height:400px;background-image:url(pic/banner.jpg);background-repeat:no-repeat;">
+	<div class="col-md-12" style="color:white;text-align:center;">
+	<h1>Docs</h1><br/>
+	<p>Microsoft Office WPS PDF 全面支持</p>
+	<p>精弘文档，是由精弘网络团队推出的在线文档分享平台</p><br/>
+	<button class="btn btn-default btn-lg" style="color:#1E90FF;" data-toggle="modal" data-target="#myModal">立即上传 <span class="glyphicon glyphicon-arrow-up"></span></button>
+	</div>
+</div>
 
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Upload Doc
-							</div>
-							<div class="panel-body">
-								<form role="form" action="UploadAction"
-									enctype="multipart/form-data" method="post">
-									<div class="form-group">
-										<label>
-											文件描述
-										</label>
-										<input type="text" class="form-control" id="description"
-											placeholder="description" name="description">
-									</div>
-									<div class="form-group">
-										<label>
-											文件分类
-										</label>
-										<select class="form-control" name="type">
-											<option value="1">
-												1
-											</option>
-											<option value="2">
-												2
-											</option>
-											<option value="3">
-												3
-											</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>
-											File input
-										</label>
-										<input type="file" id="file" name="file">
-									</div>
-									<button type="submit" class="btn btn-default">
-										Submit
-									</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+<!-- -----------End jumbo--------------------------------------------------------------------------- -->		
+<hr/>
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<div class="list-group">
+			  <a href="#" class="list-group-item active">
+			    热门文档
+			  </a>
+			  <a href="#" class="list-group-item">计算机类</a>
+			  <a href="#" class="list-group-item">外语类</a>
+			  <a href="#" class="list-group-item">艺术类</a>
+			  <a href="#" class="list-group-item">法律类</a>
+			  <a href="#" class="list-group-item">化材类</a>
+			  <a href="#" class="list-group-item">建工类</a>
+			  <a href="#" class="list-group-item">经济类</a>
 			</div>
-			<div class="col-md-2"></div>
 		</div>
+		<div class="col-md-6">
+			<div class="well">
+				<table class="table table-striped table-hover">
+				  <tr>
+					<th><span class="glyphicon glyphicon-book"></span></th>
+					<th><span class="glyphicon glyphicon-file"></span></th>
+					<th><span class="glyphicon glyphicon-thumbs-up"></span></th>
+				  </tr>
+				  <tr>
+					<td><a href="#">Hadoop实战</a></td>
+					<td>PDF</td>
+					<td>200</td>
+				  </tr>
+				   <tr>
+					<td><a href="#">JAVA程序设计</a></td>
+					<td>PDF</td>
+					<td>20</td>
+				  </tr>
+				   <tr>
+					<td><a href="#">实验报告</a></td>
+					<td>Word</td>
+					<td>133</td>
+				  </tr>
+				   <tr>
+					<td><a href="#">课件</a></td>
+					<td>PPT</td>
+					<td>39</td>
+				  </tr>	
+				   <tr>
+					<td><a href="#">课件</a></td>
+					<td>PPT</td>
+					<td>39</td>
+				  </tr>		
+				   <tr>
+					<td><a href="#">课件</a></td>
+					<td>PPT</td>
+					<td>39</td>
+				  </tr>				  
+				</table>
+				<center>
+					<nav>
+					  <ul class="pagination">
+					    <li><a href="#">&laquo;</a></li>
+					    <li><a href="#">1</a></li>
+					    <li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+					    <li><a href="#">&raquo;</a></li>
+					  </ul>
+					</nav>
+				</center>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="panel panel-danger">
+			<div class="panel-heading">贡献排行榜</div>
+			  
+			    <ul class="list-group">
+				    <li class="list-group-item"><span class="badge">42</span>Cras justo odio</li>
+				    <li class="list-group-item"><span class="badge">30</span>Dapibus ac facilisis in</li>
+				    <li class="list-group-item"><span class="badge">26</span>Morbi leo risus</li>
+				    <li class="list-group-item"><span class="badge">24</span>Porta ac consectetur ac</li>
+				    <li class="list-group-item"><span class="badge">19</span>Vestibulum at eros</li>
+			   </ul>
+			  
+			</div>		
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	<hr/>
 
-	</body>
+</div>
+<!-- ---------------------页尾 巨幕------------------------------------------------- -->
+
+  <div class="row">
+  <div class="col-md-8"></div>
+  <div class="col-md-4"><p>Powered By <a>zhoubjnb@163.com</a></p></div>
+  </div>
+
+<!-- ---------------------页尾 巨幕-END------------------------------------------------ -->
+<!-- --------上传Model------------------------------------------------ -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">分享我的资源</h4>
+      </div>
+      <div class="modal-body">
+			<form role="form" action="UploadAction" enctype="multipart/form-data" method="post">
+					<div class="form-group">
+						
+							<p class="text-primary">文件描述</p>
+						
+						<input type="text" class="form-control" id="description" placeholder="description" name="description">
+					</div>
+					<div class="form-group">
+						
+							<p class="text-primary">文件分类</p>
+						
+					<select class="form-control" name="type">
+						<option value="1">
+							计算机类
+						</option>
+						<option value="2">
+							经济类
+						</option>
+						<option value="3">
+							...
+						</option>
+					</select>
+					</div>
+					<div class="form-group">
+						
+							<p class="text-primary">选择要分享的文件</p>
+						
+						<input type="file" id="file" name="file">
+						</div>
+						<button type="submit" class="btn btn-primary">
+							分享
+						</button>
+						</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- --------上传Model--END---------------------------------------------- -->
+</body>
 </html>
