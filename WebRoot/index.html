@@ -27,19 +27,24 @@ body {
 
 
 <script type="text/javascript">
-	$(function() {	
+	$(function() 
+	{	
 		//上传
 		$("#uploadbutton").click(function() {
 			$("#ajaxMSG").text("文件上传中...");
 			ajaxFileUpload();
 		});
 		
-	$.get("IndexListAction", function(data, status) {
-			var dataobj = eval("(" + data + ")");
-				//等待解析
+
+		$.post("IndexListAction",
+		  {
+		    signal:"hot"
+		  },
+		  function(data,status){
+		  	var dataobj = eval("(" + data + ")");
 			var myTemplate = Handlebars.compile($("#table-template").html());
 			$('#tabList').html(myTemplate(dataobj));
-		});
+		  });
 	});
 
 	function ajaxFileUpload() 
@@ -77,7 +82,7 @@ body {
 <script id="table-template" type="text/x-handlebars-template">
     {{#each data}}
         <tr>
-          <td>{{id}}</td>
+          <td><a href="{{id}}">{{filename}}</a></td>
           <td>{{type}}</td>
           <td>{{good}}</td>
         </tr> 

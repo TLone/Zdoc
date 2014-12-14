@@ -15,6 +15,15 @@ import com.opensymphony.xwork2.ActionSupport;
 import dao.Dao;
 
 public class IndexList extends ActionSupport {
+private String signal;
+
+	public String getSignal() {
+	return signal;
+}
+
+public void setSignal(String signal) {
+	this.signal = signal;
+}
 
 	public void out() {
 
@@ -25,7 +34,8 @@ public class IndexList extends ActionSupport {
 		
 		try {
 			PrintWriter out = response.getWriter();
-			out.print(d.getIndexList());
+			out.print(d.getIndexList(getSignal()));//传递signal参数给数据库 控制数据库拉取到数据
+			System.out.println(getSignal());
 		} catch (IOException e) {
 			
 			e.printStackTrace();

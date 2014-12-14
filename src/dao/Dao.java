@@ -59,10 +59,12 @@ public class Dao {
 		return isFail;
 	}
 	
-	public String getIndexList()
+	public String getIndexList(String signal)
 	{
 		Connection conn = getConn();
-		String sql="select id,originnaltype,good from file";
+		String sql="select officepath,originnaltype,good,id from file";//选择热门文档
+		
+		String choose="";//会有多条sql语句，根据signal选择一条给choose
 		//等待获取到数据
 		//IndexListData 
 		JSONObject json=new JSONObject();
@@ -75,13 +77,17 @@ public class Dao {
 			
 			while(rs.next())
 			{
-				 int id=rs.getInt(1);
+				 String officepath=rs.getString(1);
 				 String type=rs.getString(2);
 				 int good=rs.getInt(3);
+				 int id=rs.getInt(4);
+				 int index=officepath.lastIndexOf("/");
+				 String filename=officepath.substring(index+1);//截取文件名
 				 JSONObject temp=new JSONObject();
-				 temp.put("id", id);
+				 temp.put("filename", filename);
 				 temp.put("type", type);
 				 temp.put("good", good);
+				 temp.put("id", id);
 				 arr.put(temp);
 			}
 			json.put("data", arr);
@@ -149,7 +155,7 @@ public class Dao {
 //	}*/
 
 	public static void main(String[] args) {
-		Dao d=new Dao();
-		d.getIndexList();
+//		Dao d=new Dao();
+//		d.getIndexList();
 	}
 }
