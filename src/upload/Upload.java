@@ -100,7 +100,7 @@ public class Upload extends ActionSupport {
 
 	public String execute() throws Exception {
 		String officesDir = "/offices/";// office 文件上传后到保存路径
-		long size = 0; // 文件大小 kb为单位
+		int size = 0; // 文件大小 kb为单位
 
 		if (getFileFileName() != null && getType() != null) {
 			// 在所有操作之前 先进行文件类型检测
@@ -116,7 +116,7 @@ public class Upload extends ActionSupport {
 			File saved = new File(officesDir, getFileFileName());
 			InputStream ins = null;
 			OutputStream ous = null;
-			size = saved.length() / 1024;
+			size = (int)saved.length() / 1024;
 
 			try {
 				saved.getParentFile().mkdirs();// 确保目的路径存在
@@ -139,9 +139,31 @@ public class Upload extends ActionSupport {
 					ins.close();
 
 			}
-			result = "上传成功";
-			System.out.println(result);
-			return SUCCESS;
+			
+			//Dao
+			Dao d=new Dao();
+			//String officepath,String originnaltype,int size,String description,String type
+			String officepath=officesDir+getFileFileName();
+			String originnaltype=getFileContentType();
+			//size 在之前已经计算
+			//getDescription()
+			//getType()
+			
+		
+			
+			if(!d.officeUpload(officepath, originnaltype, size, getDescription(), getType()))
+			{
+				result = "上传成功";
+				System.out.println(result);
+				return SUCCESS;
+			}
+			else
+			{
+				result = "数据库写入失败";
+				System.out.println(result);
+				return SUCCESS;
+			}
+			
 		} else {
 			result = "請选择文件";
 			System.out.println(result);

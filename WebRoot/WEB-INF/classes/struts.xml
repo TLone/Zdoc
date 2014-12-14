@@ -9,13 +9,17 @@
 		<action name="IndexAction" class="doc.index.Index" method="execute">
 			<result name="success">/index.html</result>
 		</action>
+
+		<action name="IndexListAction" class="ajax.IndexList" method="out">
+<!-- 仅仅在Struts2中配置该action，目的是让Struts2认识/找到该action，不需要任何result，因返回为void -->  
+		</action>
 	</package>
 	<package name="ajax" extends="json-default">
 		<action name="UploadAction" class="upload.Upload" method="execute">
-		<param name="allowedTypes">application/vnd.ms-works,application/vnd.ms-powerpoint,application/msword,application/pdf</param>
+			<param name="allowedTypes">application/vnd.ms-works,application/vnd.ms-powerpoint,application/msword,application/pdf</param>
 			<result type="json">
-			<param name="includeProperties">
-		  		result
+				<param name="includeProperties">
+					result
 		    </param>
 			</result>
 		</action>

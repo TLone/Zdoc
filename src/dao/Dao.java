@@ -4,7 +4,18 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
+import java.util.HashMap;
+
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+
+
 
 
 import com.mysql.jdbc.Connection;
@@ -26,8 +37,68 @@ public class Dao {
 		return conn;
 	}
 
+	public boolean officeUpload(String officepath,String originnaltype,int size,String description,String type) //office文件上传后 修改file表
+	{
+		boolean isFail=true;
+		Connection conn = getConn();
+		String sql="insert into file (officepath,originnaltype,size,description,type) values (?,?,?,?,?)";
+		try {
+			java.sql.PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, officepath);
+			stmt.setString(2, originnaltype);
+			stmt.setInt(3, size);
+			stmt.setString(4, description);
+			stmt.setString(5, type);
+			isFail=stmt.execute();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isFail;
+	}
 	
-	public void insertFile(String officepath,String pdfpath,String swfpath,String originnaltype,String contributer,long size,String description,int hit,String type,int good)
+	public String getIndexList()
+	{
+		Connection conn = getConn();
+		String sql="select id,originnaltype,good from file";
+		//等待获取到数据
+		//IndexListData 
+		JSONObject json=new JSONObject();
+		JSONArray arr=new JSONArray();
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			ResultSetMetaData meta=rs.getMetaData();
+			
+			
+			while(rs.next())
+			{
+				 int id=rs.getInt(1);
+				 String type=rs.getString(2);
+				 int good=rs.getInt(3);
+				 JSONObject temp=new JSONObject();
+				 temp.put("id", id);
+				 temp.put("type", type);
+				 temp.put("good", good);
+				 arr.put(temp);
+			}
+			json.put("data", arr);
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return json.toString();
+	}
+	
+	/*public void insertFile(String officepath,String pdfpath,String swfpath,String originnaltype,String contributer,long size,String description,int hit,String type,int good)
 	{
 		Connection conn = getConn();
 		String sql="insert into file (officepath,pdfpath,swfpath,originnaltype,contributer,size,description,hit,type,good) values(?,?,?,?,?,?,?,?,?,?)";
@@ -75,12 +146,10 @@ public class Dao {
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
-//	}
+//	}*/
 
 	public static void main(String[] args) {
-		// Dao d=new Dao();
-		// d.query("select * from file");
-
-
+		Dao d=new Dao();
+		d.getIndexList();
 	}
 }

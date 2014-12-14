@@ -30,7 +30,15 @@ body {
 	$(function() {	
 		//上传
 		$("#uploadbutton").click(function() {
+			$("#ajaxMSG").text("文件上传中...");
 			ajaxFileUpload();
+		});
+		
+	$.get("IndexListAction", function(data, status) {
+			var dataobj = eval("(" + data + ")");
+				//等待解析
+			var myTemplate = Handlebars.compile($("#table-template").html());
+			$('#tabList').html(myTemplate(dataobj));
 		});
 	});
 
@@ -66,7 +74,15 @@ body {
 	}
 </script>
 
-
+<script id="table-template" type="text/x-handlebars-template">
+    {{#each data}}
+        <tr>
+          <td>{{id}}</td>
+          <td>{{type}}</td>
+          <td>{{good}}</td>
+        </tr> 
+      {{/each}}
+  </script>
 	</head>
 
 	<body>
@@ -174,72 +190,8 @@ body {
 									<span class="glyphicon glyphicon-thumbs-up"></span>
 								</th>
 							</tr>
-							<tr>
-								<td>
-									<a href="#">Hadoop实战</a>
-								</td>
-								<td>
-									PDF
-								</td>
-								<td>
-									200
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="#">JAVA程序设计</a>
-								</td>
-								<td>
-									PDF
-								</td>
-								<td>
-									20
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="#">实验报告</a>
-								</td>
-								<td>
-									Word
-								</td>
-								<td>
-									133
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="#">课件</a>
-								</td>
-								<td>
-									PPT
-								</td>
-								<td>
-									39
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="#">课件</a>
-								</td>
-								<td>
-									PPT
-								</td>
-								<td>
-									39
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="#">课件</a>
-								</td>
-								<td>
-									PPT
-								</td>
-								<td>
-									39
-								</td>
-							</tr>
+							<tbody id="tabList">
+							</tbody>
 						</table>
 						<center>
 							<nav>
