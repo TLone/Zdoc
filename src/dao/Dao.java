@@ -8,8 +8,11 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import org.apache.struts2.ServletActionContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import util.Convert;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -28,7 +31,55 @@ public class Dao {
 		}
 		return conn;
 	}
-
+	
+	public String savePath(int id)//转换文件时，并且保存路径到数据库
+	{
+		Connection conn = getConn();
+		String sql1="select officepath from file where id="+id;
+		String sql2="update file set pdfpath=?,swfpath=? where id=?";
+	
+		final String PDFDIR="/pdfs/";
+		final String SWFDIR=ServletActionContext.getServletContext() .getRealPath("swfs") + "/";
+		
+	
+		String officepath=null; // office文件完整路径
+		String pdfpath=null;
+		String swfpath=null;
+		String filename=null;//office文件的文件名
+		String suffix=null;
+		try {
+			ResultSet rs = conn.createStatement().executeQuery(sql1);
+			while(rs.next())
+			{
+				officepath=rs.getString(1);
+			}
+			rs.close();
+			
+			int index=officepath.lastIndexOf("/");
+			int indexEnd=officepath.lastIndexOf(".");
+			filename=officepath.substring(index+1,indexEnd);
+			
+			pdfpath=PDFDIR+filename+".pdf";
+			swfpath=SWFDIR+filename+".swf";
+			//转换
+			Convert c=new Convert(officepath,pdfpath,swfpath);
+			c.office2PDF();
+			c.pdf2swf();
+			
+			java.sql.PreparedStatement pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, pdfpath);
+			pstmt.setString(2, swfpath);
+			pstmt.setInt(3, id);
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return swfpath;
+	}
+	
 	public String isConverted(int id) {
 
 		String sql = "select swfpath from file where id=" + id;
@@ -42,8 +93,9 @@ public class Dao {
 
 				json.put("swfpath", "null");
 				while (rs.next()) {
-					String swfpath = rs.getString(1);
-					json.put("swfpath", swfpath);
+					String swfpath = rs.getString(1);				
+					json.put("swfpath",swfpath);
+					
 				}
 				stmt.close();
 				rs.close();

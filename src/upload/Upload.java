@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringBufferInputStream;
 import java.util.Date;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -113,7 +114,12 @@ public class Upload extends ActionSupport {
 			}
 
 			// ready to copy file
-			String savedFileName=getFileFileName()+"_"+new Date();//最后保存到文件名，加上日期防止重复
+			//String savedFileName=getFileFileName()+"_"+new Date();//最后保存到文件名，加上日期防止重复
+			int index=getFileFileName().lastIndexOf(".");
+			String savedFileNameWithoutType=getFileFileName().substring(0,index);
+			String type=getFileFileName().substring(index);
+			String savedFileName=savedFileNameWithoutType+"_"+new Random().nextInt()+type;
+			
 			File saved = new File(officesDir, savedFileName);
 			InputStream ins = null;
 			OutputStream ous = null;

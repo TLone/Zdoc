@@ -51,9 +51,18 @@ body {
 		    {
 		    	
 		    	$("#documentViewer").html("<h1>文件转换中.....</h1>");
-		    	//第二次ajax  后台进行转换 返回路径
+		    	//第二次ajax  post id 后台进行转换 返回路径
+		    	$.post("ConvertFileAction",
+				  {
+				    id:id
+				  },
+				  function(data,status){
+				  	var dataobj = eval("(" + data + ")");
+				  	swfpath=dataobj.swfpath;
+
+					show(swfpath);
+				  });
 		    	
-		    	//show(swfpath);
 		    }
 		    else
 		    {

@@ -16,6 +16,9 @@
 		<action name="BrowseFileAction" class="ajax.BrowseFile" method="out">
 			<!-- 仅仅在Struts2中配置该action，目的是让Struts2认识/找到该action，不需要任何result，因返回为void -->  
 		</action>
+		<action name="ConvertFileAction" class="ajax.BrowseFile" method="convertThenOut">
+			<!-- 仅仅在Struts2中配置该action，目的是让Struts2认识/找到该action，不需要任何result，因返回为void -->  
+		</action>
 	</package>
 	<package name="ajax" extends="json-default">
 		<action name="UploadAction" class="upload.Upload" method="execute">
