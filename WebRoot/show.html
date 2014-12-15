@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>文档在线预览系统</title>
+
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/flexpaper.js"></script>
+		<script type="text/javascript" src="js/flexpaper_handlers.js"></script>
+		<script src="js/handlebars-v2.0.0.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+		<style>
+body {
+	height: 100%;
+	padding-top: 60px;
+	overflow: auto;
+}
+
+#flashContent {
+	display: none;
+}
+</style>
+		<script>
+	//用於獲取瀏覽器參數
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	};
+
+	var id = getQueryString("id");
+	
+	//post id 给后台 后台判断是否转换过 若没有 显示转换中 然后再次请求 
+	$(function() {
+		
+		  $.post("BrowseFileAction",
+		  {
+		    id:id,
+		  },
+		  function(data,status){
+		    var dataobj = eval("(" + data + ")");
+		    swfpath=dataobj.swfpath; //后台返回到swfpath 为空 或者 路径
+		    if(swfpath==null)
+		    {
+		    	
+		    	$("#documentViewer").html("<h1>文件转换中.....</h1>");
+		    	//第二次ajax  后台进行转换 返回路径
+		    	
+		    	//show(swfpath);
+		    }
+		    else
+		    {
+		    		show(swfpath);
+		    }
+		  });
+		  
+		  
+		
+	});
+	
+	function show(path) //路径为参数 显示文档
+	{
+		var startDocument = "Paper";
+					$('#documentViewer').FlexPaperViewer( {
+						config : {
+							//在这里设置路径，显示
+							SWFFile : path,
+							Scale : 0.6,
+							ZoomTransition : 'easeOut',
+							ZoomTime : 0.5,
+							ZoomInterval : 0.2,
+							FitPageOnLoad : true,
+							FitWidthOnLoad : false,
+							FullScreenAsMaxWindow : false,
+							ProgressiveLoading : false,
+							MinZoomSize : 0.2,
+							MaxZoomSize : 5,
+							SearchMatchAll : false,
+							InitViewMode : 'Portrait',
+							RenderingOrder : 'flash',
+							StartAtPage : '',
+				
+							ViewModeToolsVisible : true,
+							ZoomToolsVisible : true,
+							NavToolsVisible : true,
+							CursorToolsVisible : true,
+							SearchToolsVisible : true,
+							WMode : 'window',
+							localeChain : 'en_US'
+						}
+					});
+	}
+</script>
+
+	</head>
+	<body>
+		<!-- ----------Navbar------------------------------------------------ -->
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="index.html"> <img alt="Brand"
+								src="./pic/logo.png" width="25px" height="25px"
+								data-placement="bottom" title="Tooltip on bottom"> </a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active">
+								<a href="#">Link</a>
+							</li>
+							<li>
+								<a href="#">Link</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="#">登陆</a>
+							</li>
+							<form class="navbar-form navbar-left" role="search">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Search">
+								</div>
+								<button type="submit" class="btn btn-default">
+									Submit
+								</button>
+							</form>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+		</nav>
+		<!-- -----------End nav bar---------------------------------------------------------------- -->
+
+
+
+		<!-- -----------FlexPaper--------------------------------------------------------------- -->
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<div class="row">
+					<div class="panel panel-danger">
+						<div class="panel-body">
+							<img src="pic/headphoto.jpg" width="100%" />
+							<p>
+								<h5>
+									贡献者：
+									<span class="badge">游客</span>
+								</h5>
+							</p>
+							<p>
+								<h5>
+									浏览量：
+									<span class="badge">14</span>
+								</h5>
+							</p>
+							<p>
+								<h5>
+									赞：
+									<span class="badge">5</span>
+								</h5>
+							</p>
+							<hr>
+							<div class="row">
+								<div class="col-md-6">
+									<button class="btn btn-primary">
+										<span class="glyphicon glyphicon-star"></span>点赞
+									</button>
+								</div>
+								<div class="col-md-6">
+									<button class="btn btn-success">
+										<span class="glyphicon glyphicon-arrow-down"></span>下载
+									</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							还没想好放什么...
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<center>
+					<div id="documentViewer" class="flexpaper_viewer"
+						style="width: 650px; height: 500px"></div>
+
+				
+				</center>
+			</div>
+		</div>
+		<!-- ----------End-FlexPaper--------------------------------------------------------------- -->
+	</body>
+</html>

@@ -11,7 +11,10 @@
 		</action>
 
 		<action name="IndexListAction" class="ajax.IndexList" method="out">
-<!-- 仅仅在Struts2中配置该action，目的是让Struts2认识/找到该action，不需要任何result，因返回为void -->  
+			<!-- 仅仅在Struts2中配置该action，目的是让Struts2认识/找到该action，不需要任何result，因返回为void -->  
+		</action>
+		<action name="BrowseFileAction" class="ajax.BrowseFile" method="out">
+			<!-- 仅仅在Struts2中配置该action，目的是让Struts2认识/找到该action，不需要任何result，因返回为void -->  
 		</action>
 	</package>
 	<package name="ajax" extends="json-default">

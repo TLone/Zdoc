@@ -47,7 +47,7 @@ body {
 		  });
 	});
 
-	function ajaxFileUpload() 
+	function ajaxFileUpload() //ajax方式上传文件
 	{
 
 		var type = $("#type").val();
@@ -70,6 +70,17 @@ body {
 				var temp = data.substring(5,data.length-6);
 				var dataobj = eval("(" + temp + ")");
 				$("#ajaxMSG").text(dataobj.result);
+				//$('#myModal').modal('toggle');
+				
+				$.post("IndexListAction", //上传完成后 重新拉取
+				  {
+				    signal:"hot"
+				  },
+				  function(data,status){
+				  	var dataobj = eval("(" + data + ")");
+					var myTemplate = Handlebars.compile($("#table-template").html());
+					$('#tabList').html(myTemplate(dataobj));
+				  });
 			},
 			error : function(data, status, e) {
 				//$("#ajaxMSG").text(data);
@@ -82,7 +93,7 @@ body {
 <script id="table-template" type="text/x-handlebars-template">
     {{#each data}}
         <tr>
-          <td><a href="{{id}}">{{filename}}</a></td>
+          <td><a href="./show.html?id={{id}}">{{filename}}</a></td>
           <td>{{type}}</td>
           <td>{{good}}</td>
         </tr> 

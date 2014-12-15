@@ -113,7 +113,8 @@ public class Upload extends ActionSupport {
 			}
 
 			// ready to copy file
-			File saved = new File(officesDir, getFileFileName());
+			String savedFileName=getFileFileName()+"_"+new Date();//最后保存到文件名，加上日期防止重复
+			File saved = new File(officesDir, savedFileName);
 			InputStream ins = null;
 			OutputStream ous = null;
 			size = (int)saved.length() / 1024;
@@ -143,7 +144,7 @@ public class Upload extends ActionSupport {
 			//Dao
 			Dao d=new Dao();
 			//String officepath,String originnaltype,int size,String description,String type
-			String officepath=officesDir+getFileFileName();
+			String officepath=officesDir+savedFileName;
 			String originnaltype=getFileContentType();
 			//size 在之前已经计算
 			//getDescription()
